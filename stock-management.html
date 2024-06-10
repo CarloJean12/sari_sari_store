@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .actions {
+            text-align: center;
+        }
+        .actions button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Management</h1>
+        <a href="index.html">Back to Main Page</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Stocks</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Straight Jeans</td>
+                    <td><span id="straightStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('straight', 'add')">Add</button>
+                        <button onclick="adjustStock('straight', 'subtract')">Subtract</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Slim Jeans</td>
+                    <td><span id="slimStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('slim', 'add')">Add</button>
+                        <button onclick="adjustStock('slim', 'subtract')">Subtract</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wide Jeans</td>
+                    <td><span id="wideStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('wide', 'add')">Add</button>
+                        <button onclick="adjustStock('wide', 'subtract')">Subtract</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Flared Jeans</td>
+                    <td><span id="flaredStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('flared', 'add')">Add</button>
+                        <button onclick="adjustStock('flared', 'subtract')">Subtract</button>
+                    </td>
+					<tr>
+                    <td>Over-Sized T-shirt</td>
+                    <td><span id="osStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('straight', 'add')">Add</button>
+                        <button onclick="adjustStock('straight', 'subtract')">Subtract</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Dri-Fit</td>
+                    <td><span id="fitStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('slim', 'add')">Add</button>
+                        <button onclick="adjustStock('slim', 'subtract')">Subtract</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Henley</td>
+                    <td><span id="henleyStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('wide', 'add')">Add</button>
+                        <button onclick="adjustStock('wide', 'subtract')">Subtract</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V-Neck</td>
+                    <td><span id="vStocks">50</span></td>
+                    <td class="actions">
+                        <button onclick="adjustStock('flared', 'add')">Add</button>
+                        <button onclick="adjustStock('flared', 'subtract')">Subtract</button>
+                    </td>
+					
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function adjustStock(item, action) {
+            var stockElement = document.getElementById(item + 'Stocks');
+            var stocks = parseInt(stockElement.innerText);
+            var adjustment = prompt("Enter the number of items to " + action + ":");
+
+            if (adjustment != null && adjustment !== '') {
+                adjustment = parseInt(adjustment);
+                if (action === 'add') {
+                    stocks += adjustment;
+                } else if (action === 'subtract') {
+                    stocks = Math.max(0, stocks - adjustment); // Ensure stocks don't go below 0
+                }
+                stockElement.innerText = stocks;
+                localStorage.setItem(item + 'Stocks', stocks);
+            }
+        }
+
+        function loadStocks() {
+            var items = ['straight', 'slim', 'wide', 'flared'];
+            items.forEach(function(item) {
+                var stock = localStorage.getItem(item + 'Stocks') || 50;
+                document.getElementById(item + 'Stocks').innerText = stock;
+            });
+        }
+
+        window.onload = loadStocks;
+    </script>
+</body>
+</html>

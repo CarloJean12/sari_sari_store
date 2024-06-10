@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jean's Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('Enguancho_CarloJean_Logo.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .total {
+            background-color: #ff0000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #00b7eb;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #ff0000;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jean's Store</h1>
+        <a href="stock-management.html">Manage Stocks</a>
+        <div>
+            <h3>Select Discount Type</h3>
+            <label>
+                <input type="radio" name="discount" value="regular" checked onchange="calculateTotal()"> Regular
+            </label>
+            <label>
+                <input type="radio" name="discount" value="senior" onchange="calculateTotal()"> Senior Citizen (20%)
+            </label>
+            <label>
+                <input type="radio" name="discount" value="pwd" onchange="calculateTotal()"> PWD (30%)
+            </label>
+            <label>
+                <input type="radio" name="discount" value="student" onchange="calculateTotal()"> Student (10%)
+            </label>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price (PHP)</th>
+                    <th>Stocks</th>
+                    <th>Quantity</th>
+                    <th>Total (PHP)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Jeans Table -->
+                <table>
+                    <th><h2>Jeans</h2></th>
+                    <tr>
+                        <td>Straight Jeans</td>
+                        <td>800.00</td>
+                        <td><span id="straightStocks">50</span></td>
+                        <td><input type="number" id="straightQuantity" value="0" min="0" onchange="calculateTotal('straight')"></td>
+                        <td><span id="straightTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Slim Jeans</td>
+                        <td>750.00</td>
+                        <td><span id="slimStocks">50</span></td>
+                        <td><input type="number" id="slimQuantity" value="0" min="0" onchange="calculateTotal('slim')"></td>
+                        <td><span id="slimTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Wide Jeans</td>
+                        <td>850.00</td>
+                        <td><span id="wideStocks">50</span></td>
+                        <td><input type="number" id="wideQuantity" value="0" min="0" onchange="calculateTotal('wide')"></td>
+                        <td><span id="wideTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Flared Jeans</td>
+                        <td>850.00</td>
+                        <td><span id="flaredStocks">50</span></td>
+                        <td><input type="number" id="flaredQuantity" value="0" min="0" onchange="calculateTotal('flared')"></td>
+                        <td><span id="flaredTotal">0</span></td>
+                    </tr>
+                </table>
+                <!-- T-shirts Table -->
+                <table>
+                    <th><h2>T-shirts</h2></th>
+                    <tr>
+                        <td>Over-Sized T-shirt</td>
+                        <td>200.00</td>
+                        <td><span id="osStocks">50</span></td>
+                        <td><input type="number" id="osQuantity" value="0" min="0" onchange="calculateTotal('os')"></td>
+                        <td><span id="osTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dri-Fit</td>
+                        <td>400.00</td>
+                        <td><span id="fitStocks">50</span></td>
+                        <td><input type="number" id="fitQuantity" value="0" min="0" onchange="calculateTotal('fit')"></td>
+                        <td><span id="fitTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Henley</td>
+                        <td>350.00</td>
+                        <td><span id="henleyStocks">50</span></td>
+                        <td><input type="number" id="henleyQuantity" value="0" min="0" onchange="calculateTotal('henley')"></td>
+                        <td><span id="henleyTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>V-Neck</td>
+                        <td>250.00</td>
+                        <td><span id="vStocks">50</span></td>
+                        <td><input type="number" id="vQuantity" value="0" min="0" onchange="calculateTotal('v')"></td>
+                        <td><span id="vTotal">0</span></td>
+                    </tr>
+                </table>
+                <!-- Perfume Table -->
+                <table>
+                    <th><h2>Perfume</h2></th>
+                    <tr>
+                        <td>Body Mists</td>
+                        <td>200.00</td>
+                        <td><span id="mistsStocks">50</span></td>
+                        <td><input type="number" id="mistsQuantity" value="0" min="0" onchange="calculateTotal('mists')"></td>
+                        <td><span id="mistsTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Perfume Oil (Oil-based)</td>
+                        <td>350.00</td>
+                        <td><span id="perfumeStocks">50</span></td>
+                        <td><input type="number" id="perfumeQuantity" value="0" min="0" onchange="calculateTotal('perfume')"></td>
+                        <td><span id="perfumeTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cologne</td>
+                        <td>150.00</td>
+                        <td><span id="cologneStocks">50</span></td>
+                        <td><input type="number" id="cologneQuantity" value="0" min="0" onchange="calculateTotal('cologne')"></td>
+                        <td><span id="cologneTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Fraiche</td>
+                        <td>400.00</td>
+                        <td><span id="fraicheStocks">50</span></td>
+                        <td><input type="number" id="fraicheQuantity" value="0" min="0" onchange="calculateTotal('fraiche')"></td>
+                        <td><span id="fraicheTotal">0</span></td>
+                    </tr>
+                </table>
+                <!-- Sando Table -->
+                <table>
+                    <th><h2>Sando</h2></th>
+                    <tr>
+                        <td>SS Muscle Tee Plain Sando</td>
+                        <td>150.00</td>
+                        <td><span id="muscleStocks">50</span></td>
+                        <td><input type="number" id="muscleQuantity" value="0" min="0" onchange="calculateTotal('muscle')"></td>
+                        <td><span id="muscleTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>TRIBAL Sando</td>
+                        <td>100.00</td>
+                        <td><span id="tribalStocks">50</span></td>
+                        <td><input type="number" id="tribalQuantity" value="0" min="0" onchange="calculateTotal('tribal')"></td>
+                        <td><span id="tribalTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Drifit Sando</td>
+                        <td>100.00</td>
+                        <td><span id="drifitStocks">50</span></td>
+                        <td><input type="number" id="drifitQuantity" value="0" min="0" onchange="calculateTotal('drifit')"></td>
+                        <td><span id="drifitTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>SS Muscle Tee Print Sando</td>
+                        <td>150.00</td>
+                        <td><span id="teeStocks">50</span></td>
+                        <td><input type="number" id="teeQuantity" value="0" min="0" onchange="calculateTotal('tee')"></td>
+                        <td><span id="teeTotal">0</span></td>
+                    </tr>
+                </table>
+                <!-- Toys Table -->
+                <table>
+                    <th><h2>Toys</h2></th>
+                    <tr>
+                        <td>Plushies</td>
+                        <td>200.00</td>
+                        <td><span id="plushiesStocks">50</span></td>
+                        <td><input type="number" id="plushiesQuantity" value="0" min="0" onchange="calculateTotal('plushies')"></td>
+                        <td><span id="plushiesTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>RC cars</td>
+                        <td>350.00</td>
+                        <td><span id="rcStocks">50</span></td>
+                        <td><input type="number" id="rcQuantity" value="0" min="0" onchange="calculateTotal('rc')"></td>
+                        <td><span id="rcTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dolls</td>
+                        <td>150.00</td>
+                        <td><span id="dollsStocks">50</span></td>
+                        <td><input type="number" id="dollsQuantity" value="0" min="0" onchange="calculateTotal('dolls')"></td>
+                        <td><span id="dollsTotal">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Toy trucks</td>
+                        <td>200.00</td>
+                        <td><span id="trucksStocks">50</span></td>
+                        <td><input type="number" id="trucksQuantity" value="0" min="0" onchange="calculateTotal('trucks')"></td>
+                        <td><span id="trucksTotal">0</span></td>
+                    </tr>
+                </table>
+            </tbody>
+            <tr>
+                <td colspan="4" align="right">Total:</td>
+                <td><span id="totalAmount">0</span> PHP</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function calculateTotal(item) {
+            var quantityElement = document.getElementById(item + 'Quantity');
+            var quantity = parseInt(quantityElement.value);
+            var priceElement = quantityElement.parentNode.previousElementSibling.previousElementSibling;
+            var price = parseFloat(priceElement.innerText);
+
+            var discountType = document.querySelector('input[name="discount"]:checked').value;
+            var discount = 0;
+            if (discountType === 'senior') {
+                discount = 0.20;
+            } else if (discountType === 'student') {
+                discount = 0.10;
+            } else if (discountType === 'pwd') {
+                discount = 0.30;
+            }
+
+            var totalElement = document.getElementById(item + 'Total');
+            var total = quantity * price * (1 - discount);
+            totalElement.innerText = total.toFixed(2);
+
+            var stockElement = document.getElementById(item + 'Stocks');
+            var initialStocks = 50; // Assuming initial stock is 50
+            stockElement.innerText = initialStocks - quantity;
+
+            updateTotalAmount();
+        }
+
+        function updateTotalAmount() {
+            var totalAmount = 0;
+            var totalElements = document.querySelectorAll('[id$="Total"]');
+            totalElements.forEach(function (totalElement) {
+                totalAmount += parseFloat(totalElement.innerText);
+            });
+            document.getElementById('totalAmount').innerText = totalAmount.toFixed(2);
+        }
+    </script>
+</body>
+</html>
